@@ -1,0 +1,7 @@
+.idea
+*.log
+./etc/config_test.yml
+./etc/config_temp.yml
+build.sh
+*.pcap
+*.xml
