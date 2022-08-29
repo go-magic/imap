@@ -1,8 +1,8 @@
 package imap
 
-type StringStruct map[string]struct{}
+type StringStructMap map[string]struct{}
 
-func (s StringStruct)ToSlice() []string {
+func (s StringStructMap)ToSlice() []string {
 	slices := make([]string,0,len(s))
 	for str,_ := range s {
 		slices = append(slices,str)
@@ -10,36 +10,36 @@ func (s StringStruct)ToSlice() []string {
 	return slices
 }
 
-func (s StringStruct)Exist(str string) bool {
+func (s StringStructMap)Exist(str string) bool {
 	_,exist := s[str]
 	return exist
 }
 
-func (s StringStruct)Set(str string){
+func (s StringStructMap)Set(str string){
 	s[str] = struct{}{}
 }
 
-func (s StringStruct)Delete(str string){
+func (s StringStructMap)Delete(str string){
 	delete(s,str)
 }
 
-type SortStringStruct struct {
-	keys []string
-	stringStruct StringStruct
+type SortStringStructMap struct {
+	keys            []string
+	stringStructMap StringStructMap
 }
 
-func (s SortStringStruct)ToSlice() []string {
+func (s SortStringStructMap)ToSlice() []string {
 	return s.keys
 }
 
-func (s SortStringStruct)Set(str string)  {
+func (s SortStringStructMap)Set(str string)  {
 	if !s.Exist(str) {
 		s.keys = append(s.keys,str)
-		s.stringStruct[str] = struct{}{}
+		s.stringStructMap[str] = struct{}{}
 	}
 }
 
-func (s SortStringStruct)Exist(str string) bool {
-	_,exist := s.stringStruct[str]
+func (s SortStringStructMap)Exist(str string) bool {
+	_,exist := s.stringStructMap[str]
 	return exist
 }
